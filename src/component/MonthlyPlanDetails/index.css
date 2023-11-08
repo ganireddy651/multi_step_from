@@ -1,0 +1,27 @@
+.plan-details {
+  width: 100px;
+  height: 120px;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.plan-image {
+  height: 30px;
+  width: 30px;
+}
+
+.plan {
+  display: block;
+  color: hsl(213, 96%, 18%);
+  font-size: 16px;
+  font-weight: 600;
+}
+.price {
+  display: block;
+  color: hsl(231, 11%, 63%);
+  font-size: 12px;
+  font-weight: 500;
+}
