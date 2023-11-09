@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {v4 as uuidv4} from 'uuid'
 import Step from '../Step'
+import FormContext from '../../context/FormContext'
 import './index.css'
 
 const sideBarData = [
@@ -31,8 +32,7 @@ const sideBarData = [
   },
 ]
 
-const PersonalInfo = props => {
-  const [activeStep, setActiveStep] = useState(sideBarData[0].id)
+const PersonalInfo = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -43,8 +43,7 @@ const PersonalInfo = props => {
   const [showEmailError, setShowEmailError] = useState(false)
   const [showNumberError, setShowNumberError] = useState(false)
 
-  const {nextStep} = props
-  console.log(activeStep)
+  const {nextStep, stepNum} = useContext(FormContext)
 
   const onNextStep = () => {
     // if (name === '') {
@@ -67,7 +66,6 @@ const PersonalInfo = props => {
     //   setActiveStep(sideBarData[1].id)
     // }
     nextStep()
-    setActiveStep(sideBarData[1].id)
   }
 
   return (
@@ -78,7 +76,8 @@ const PersonalInfo = props => {
             <Step
               eachStep={eachStep}
               key={eachStep.id}
-              isActive={activeStep === eachStep.id}
+              isActive={stepNum === eachStep.num}
+              nextStep={nextStep}
             />
           ))}
         </div>

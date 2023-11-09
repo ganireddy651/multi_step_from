@@ -1,34 +1,27 @@
 /* eslint-disable consistent-return */
-import React, {useState} from 'react'
+import {useContext} from 'react'
 import PersonalInfo from '../PersonalInfo'
 import SelectPlan from '../SelectPlan'
 import AddOns from '../AddOns'
 import Summery from '../Summery'
+import FormContext from '../../context/FormContext'
 import './index.css'
 
 const MultiStepFrom = () => {
-  const [step, setStep] = useState(1)
-
-  const nextStep = () => {
-    setStep(step + 1)
-  }
-
-  const previousStep = () => {
-    setStep(step - 1)
-  }
+  const {stepNum} = useContext(FormContext)
 
   const renderForm = () => {
-    switch (step) {
+    switch (stepNum) {
       case 1:
-        return <PersonalInfo nextStep={nextStep} />
+        return <PersonalInfo />
       case 2:
-        return <SelectPlan nextStep={nextStep} previousStep={previousStep} />
+        return <SelectPlan />
       case 3:
-        return <AddOns nextStep={nextStep} previousStep={previousStep} />
+        return <AddOns />
       case 4:
-        return <Summery nextStep={nextStep} previousStep={previousStep} />
+        return <Summery />
       default:
-        return <PersonalInfo nextStep={nextStep} previousStep={previousStep} />
+        break
     }
   }
 

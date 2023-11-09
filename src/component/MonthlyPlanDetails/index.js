@@ -9,7 +9,7 @@ const MonthlyPlanDetails = props => {
       <img className="plan-image" src={imageUrl} alt={plan} />
       <div>
         <span className="plan">{plan}</span>
-        <span className="price">{price}</span>
+        <span className="price">{`$${price}/mo`}</span>
       </div>
     </div>
   )

@@ -1,7 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, {useState} from 'react'
+import {useState, useContext} from 'react'
 import {v4 as uuidv4} from 'uuid'
+import FormContext from '../../context/FormContext'
 import Step from '../Step'
+import YearlyAddOnDetails from '../YearlyAddOnDetails'
+import MonthlyAddOnDetails from '../MonthlyAddOnDetails'
 import './index.css'
 
 const sideBarData = [
@@ -31,18 +34,56 @@ const sideBarData = [
   },
 ]
 
-const AddOns = props => {
-  const [activeStep, setActiveStep] = useState(sideBarData[0].id)
-  const {nextStep, previousStep} = props
+const monthlyAddOnDetails = [
+  {
+    id: uuidv4(),
+    service: 'Online service',
+    description: 'Access to multiplayer games',
+    price: 1,
+  },
+  {
+    id: uuidv4(),
+    service: 'Large storage',
+    description: 'Extra 1TB of cloud save',
+    price: 2,
+  },
+  {
+    id: uuidv4(),
+    service: 'Customizable profile',
+    description: 'Custom theme on your profile',
+    price: 2,
+  },
+]
+const yearlyAddOnDetails = [
+  {
+    id: uuidv4(),
+    service: 'Online service',
+    description: 'Access to multiplayer games',
+    price: 10,
+  },
+  {
+    id: uuidv4(),
+    service: 'Large storage',
+    description: 'Extra 1TB of cloud save',
+    price: 20,
+  },
+  {
+    id: uuidv4(),
+    service: 'Customizable profile',
+    description: 'Custom theme on your profile',
+    price: 20,
+  },
+]
+
+const AddOns = () => {
+  const {nextStep, previousStep, stepNum, togglePlan} = useContext(FormContext)
 
   const onNextStep = () => {
     nextStep()
-    setActiveStep(sideBarData[3].id)
   }
 
   const onPreviousStep = () => {
     previousStep()
-    setActiveStep(sideBarData[1].id)
   }
 
   return (
@@ -53,32 +94,35 @@ const AddOns = props => {
             <Step
               eachStep={eachStep}
               key={eachStep.id}
-              activeStep={activeStep}
+              isActive={stepNum === eachStep.num}
             />
           ))}
         </div>
         <div className="user-info-container">
           <h3>Pick add-ons</h3>
-          <p>Please provide your name,email address and phone number.</p>
-          <div className="input-container">
-            <label htmlFor="name">Name</label>
-            <br />
-            <input type="text" id="name" placeholder="Name" />
+          <p>Add-ons help enhance your gaming experience.</p>
+          <div className="toggle-addon-container">
+            {togglePlan ? (
+              <>
+                {yearlyAddOnDetails.map(eachAddon => (
+                  <YearlyAddOnDetails
+                    eachAddon={eachAddon}
+                    key={eachAddon.id}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                {monthlyAddOnDetails.map(eachAddon => (
+                  <MonthlyAddOnDetails
+                    eachAddon={eachAddon}
+                    key={eachAddon.id}
+                  />
+                ))}
+              </>
+            )}
           </div>
-          <div className="input-container">
-            <label htmlFor="email">Email Address</label>
-            <br />
-            <input type="email" id="email" placeholder="Email" />
-          </div>
-          <div className="input-container">
-            <label htmlFor="email">Phone Number</label>
-            <br />
-            <input
-              type="text"
-              id="address"
-              placeholder="e.g. +91 243 567 9878"
-            />
-          </div>
+
           <button type="button" onClick={onPreviousStep}>
             Go back
           </button>

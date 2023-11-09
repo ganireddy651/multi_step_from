@@ -1,8 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, {useState} from 'react'
+import {useState, useContext} from 'react'
 import {v4 as uuidv4} from 'uuid'
 import MonthlyPlanDetails from '../MonthlyPlanDetails'
 import Step from '../Step'
+import FormContext from '../../context/FormContext'
 import './index.css'
 import YearlyPlanDetails from '../YearlyPlanDetails'
 
@@ -39,21 +40,21 @@ const monthlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447891/icon-arcade_ccagxj.svg',
     plan: 'Arcade',
-    price: '$9/mo',
+    price: 9,
   },
   {
     id: uuidv4(),
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447926/icon-advanced_y7s3ok.svg',
     plan: 'Advanced',
-    price: '$12/mo',
+    price: 12,
   },
   {
     id: uuidv4(),
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447943/icon-pro_bn71nq.svg',
     plan: 'Pro',
-    price: '$15/mo',
+    price: 15,
   },
 ]
 const yearlyPlanDetails = [
@@ -62,7 +63,7 @@ const yearlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447891/icon-arcade_ccagxj.svg',
     plan: 'Arcade',
-    price: '$90/yr',
+    price: 90,
     freePlan: '2 months free',
   },
   {
@@ -70,7 +71,7 @@ const yearlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447926/icon-advanced_y7s3ok.svg',
     plan: 'Advanced',
-    price: '$120/yr',
+    price: 120,
     freePlan: '2 months free',
   },
   {
@@ -78,28 +79,26 @@ const yearlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447943/icon-pro_bn71nq.svg',
     plan: 'Pro',
-    price: '$150/yr',
+    price: 120,
     freePlan: '2 months free',
   },
 ]
 
-const SelectPlan = props => {
-  const [activeStep, setActiveStep] = useState(sideBarData[0].id)
-  const [togglePlan, setTogglePlan] = useState(false)
-  const {nextStep, previousStep} = props
-
-  const updateActiveStep = id => {
-    setActiveStep(id)
-  }
+const SelectPlan = () => {
+  const {
+    nextStep,
+    previousStep,
+    stepNum,
+    togglePlan,
+    changeTogglePlan,
+  } = useContext(FormContext)
 
   const onNextStep = () => {
     nextStep()
-    setActiveStep(sideBarData[2].id)
   }
 
   const onPreviousStep = () => {
     previousStep()
-    setActiveStep(sideBarData[0].id)
   }
 
   const toggleIcon = togglePlan
@@ -113,7 +112,7 @@ const SelectPlan = props => {
             <Step
               eachStep={eachStep}
               key={eachStep.id}
-              isActive={activeStep === eachStep.id}
+              isActive={stepNum === eachStep.num}
             />
           ))}
         </div>
@@ -148,7 +147,7 @@ const SelectPlan = props => {
                 style={{width: '30px', height: '30px', margin: '0 20px'}}
                 src={toggleIcon}
                 alt="toggle icon"
-                onClick={() => setTogglePlan(!togglePlan)}
+                onClick={() => changeTogglePlan()}
               />
               <span>Yearly</span>
             </div>

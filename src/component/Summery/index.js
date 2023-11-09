@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {v4 as uuidv4} from 'uuid'
+import FormContext from '../../context/FormContext'
 import Step from '../Step'
 
 const sideBarData = [
@@ -30,22 +31,13 @@ const sideBarData = [
   },
 ]
 
-const Summery = props => {
-  const [activeStep, setActiveStep] = useState(sideBarData[0].id)
-  const {nextStep, previousStep} = props
-
-  const updateActiveStep = id => {
-    setActiveStep(id)
-  }
-
-  const onNextStep = () => {
-    nextStep()
-  }
+const Summery = () => {
+  const {previousStep, stepNum} = useContext(FormContext)
 
   const onPreviousStep = () => {
     previousStep()
-    setActiveStep(sideBarData[2])
   }
+
   return (
     <div className="app-container">
       <form className="form">
@@ -54,14 +46,13 @@ const Summery = props => {
             <Step
               eachStep={eachStep}
               key={eachStep.id}
-              isActive={activeStep === eachStep.id}
-              updateActiveStep={updateActiveStep}
+              isActive={stepNum === eachStep.num}
             />
           ))}
         </div>
         <div className="user-info-container">
           <h3>Finishing up</h3>
-          <p>Please provide your name,email address and phone number.</p>
+          <p>Double-check every thing looks OK before confirming.</p>
           <div className="input-container">
             <label htmlFor="name">Name</label>
             <br />
