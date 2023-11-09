@@ -82,8 +82,10 @@ const PersonalInfo = () => {
           ))}
         </div>
         <div className="user-info-container">
-          <h3>Personal Info</h3>
-          <p>Please provide your name,email address and phone number.</p>
+          <h3 className="main-heading">Personal info</h3>
+          <p className="description">
+            Please provide your name,email address and phone number.
+          </p>
           <div className="input-container">
             <div
               style={{
@@ -92,13 +94,16 @@ const PersonalInfo = () => {
                 alignItems: 'center',
               }}
             >
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name" className="label">
+                Name
+              </label>
               {showNameError && <span>{nameError}</span>}
             </div>
             <input
+              className="search-input"
               type="text"
               id="name"
-              placeholder="Name"
+              placeholder="e.g.Stephen King"
               onChange={e => {
                 setName(e.target.value)
               }}
@@ -113,13 +118,16 @@ const PersonalInfo = () => {
                 alignItems: 'center',
               }}
             >
-              <label htmlFor="email">Email Address</label>
+              <label className="label" htmlFor="email">
+                Email Address
+              </label>
               {showEmailError && <span>{emailError}</span>}
             </div>
             <input
               type="email"
               id="email"
-              placeholder="Email"
+              className="search-input"
+              placeholder="e.g.stephenking@lorem.com"
               onChange={e => {
                 setEmail(e.target.value)
               }}
@@ -134,12 +142,15 @@ const PersonalInfo = () => {
                 alignItems: 'center',
               }}
             >
-              <label htmlFor="phone">Phone Number</label>
+              <label htmlFor="phone" className="label">
+                Phone Number
+              </label>
               {showNumberError && <span>{phoneError}</span>}
             </div>
             <input
               type="text"
               id="phone"
+              className="search-input"
               placeholder="e.g. +91 243 567 9878"
               onChange={e => {
                 setPhone(e.target.value)
@@ -147,9 +158,11 @@ const PersonalInfo = () => {
               value={phone}
             />
           </div>
-          <button type="button" onClick={onNextStep}>
-            Next Step
-          </button>
+          <div className="next-button-container">
+            <button type="button" onClick={onNextStep} className="next-button">
+              Next Step
+            </button>
+          </div>
         </div>
       </form>
     </div>

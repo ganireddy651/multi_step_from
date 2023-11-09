@@ -1,0 +1,10 @@
+.thanks-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.thanks-description {
+  text-align: center;
+}

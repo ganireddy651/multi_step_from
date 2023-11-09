@@ -3,6 +3,8 @@ import React, {useState, useContext} from 'react'
 import {v4 as uuidv4} from 'uuid'
 import FormContext from '../../context/FormContext'
 import Step from '../Step'
+import ThankYou from '../ThankYou'
+import './index.css'
 
 const sideBarData = [
   {
@@ -32,7 +34,9 @@ const sideBarData = [
 ]
 
 const Summery = () => {
-  const {previousStep, stepNum} = useContext(FormContext)
+  const {previousStep, stepNum, summery} = useContext(FormContext)
+  const [confirm, setConfirm] = useState(false)
+  console.log(summery)
 
   const onPreviousStep = () => {
     previousStep()
@@ -50,33 +54,51 @@ const Summery = () => {
             />
           ))}
         </div>
-        <div className="user-info-container">
-          <h3>Finishing up</h3>
-          <p>Double-check every thing looks OK before confirming.</p>
-          <div className="input-container">
-            <label htmlFor="name">Name</label>
-            <br />
-            <input type="text" id="name" placeholder="Name" />
+        {confirm ? (
+          <ThankYou />
+        ) : (
+          <div className="user-info-container">
+            <h3 className="main-heading">Finishing up</h3>
+            <p className="description">
+              Double-check every thing looks OK before confirming.
+            </p>
+            <div className="input-container">
+              <label htmlFor="name">Name</label>
+              <br />
+              <input type="text" id="name" placeholder="Name" />
+            </div>
+            <div className="input-container">
+              <label htmlFor="email">Email Address</label>
+              <br />
+              <input type="email" id="email" placeholder="Email" />
+            </div>
+            <div className="input-container">
+              <label htmlFor="email">Phone Number</label>
+              <br />
+              <input
+                type="text"
+                id="address"
+                placeholder="e.g. +91 243 567 9878"
+              />
+            </div>
+            <div className="button-container">
+              <button
+                className="go-back-button"
+                type="button"
+                onClick={onPreviousStep}
+              >
+                Go back
+              </button>
+              <button
+                onClick={() => setConfirm(true)}
+                className="confirm-button"
+                type="button"
+              >
+                Confirm
+              </button>
+            </div>
           </div>
-          <div className="input-container">
-            <label htmlFor="email">Email Address</label>
-            <br />
-            <input type="email" id="email" placeholder="Email" />
-          </div>
-          <div className="input-container">
-            <label htmlFor="email">Phone Number</label>
-            <br />
-            <input
-              type="text"
-              id="address"
-              placeholder="e.g. +91 243 567 9878"
-            />
-          </div>
-          <button type="button" onClick={onPreviousStep}>
-            Go back
-          </button>
-          <button type="button">Confirm</button>
-        </div>
+        )}
       </form>
     </div>
   )

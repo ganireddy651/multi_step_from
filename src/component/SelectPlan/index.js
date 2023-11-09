@@ -40,21 +40,21 @@ const monthlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447891/icon-arcade_ccagxj.svg',
     plan: 'Arcade',
-    price: 9,
+    PlanPrice: 9,
   },
   {
     id: uuidv4(),
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447926/icon-advanced_y7s3ok.svg',
     plan: 'Advanced',
-    price: 12,
+    PlanPrice: 12,
   },
   {
     id: uuidv4(),
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447943/icon-pro_bn71nq.svg',
     plan: 'Pro',
-    price: 15,
+    PlanPrice: 15,
   },
 ]
 const yearlyPlanDetails = [
@@ -63,7 +63,7 @@ const yearlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447891/icon-arcade_ccagxj.svg',
     plan: 'Arcade',
-    price: 90,
+    PlanPrice: 90,
     freePlan: '2 months free',
   },
   {
@@ -71,7 +71,7 @@ const yearlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447926/icon-advanced_y7s3ok.svg',
     plan: 'Advanced',
-    price: 120,
+    PlanPrice: 120,
     freePlan: '2 months free',
   },
   {
@@ -79,7 +79,7 @@ const yearlyPlanDetails = [
     imageUrl:
       'https://res.cloudinary.com/dky69roxl/image/upload/v1699447943/icon-pro_bn71nq.svg',
     plan: 'Pro',
-    price: 120,
+    PlanPrice: 120,
     freePlan: '2 months free',
   },
 ]
@@ -117,8 +117,10 @@ const SelectPlan = () => {
           ))}
         </div>
         <div className="user-info-container">
-          <h3>Select your plan</h3>
-          <p>You have the option of monthly or yearly billing.</p>
+          <h3 className="main-heading">Select your plan</h3>
+          <p className="description">
+            You have the option of monthly or yearly billing.
+          </p>
           <div className="plans-container">
             {togglePlan ? (
               <>
@@ -152,12 +154,18 @@ const SelectPlan = () => {
               <span>Yearly</span>
             </div>
           </div>
-          <button type="button" onClick={onPreviousStep}>
-            Go back
-          </button>
-          <button type="button" onClick={onNextStep}>
-            Next Step
-          </button>
+          <div className="button-container">
+            <button
+              className="go-back-button"
+              type="button"
+              onClick={onPreviousStep}
+            >
+              Go back
+            </button>
+            <button className="next-button" type="button" onClick={onNextStep}>
+              Next Step
+            </button>
+          </div>
         </div>
       </form>
     </div>

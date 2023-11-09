@@ -99,8 +99,10 @@ const AddOns = () => {
           ))}
         </div>
         <div className="user-info-container">
-          <h3>Pick add-ons</h3>
-          <p>Add-ons help enhance your gaming experience.</p>
+          <h3 className="main-heading">Pick add-ons</h3>
+          <p className="description">
+            Add-ons help enhance your gaming experience.
+          </p>
           <div className="toggle-addon-container">
             {togglePlan ? (
               <>
@@ -122,13 +124,18 @@ const AddOns = () => {
               </>
             )}
           </div>
-
-          <button type="button" onClick={onPreviousStep}>
-            Go back
-          </button>
-          <button type="button" onClick={onNextStep}>
-            Next Step
-          </button>
+          <div className="button-container">
+            <button
+              className="go-back-button"
+              type="button"
+              onClick={onPreviousStep}
+            >
+              Go back
+            </button>
+            <button className="next-button" type="button" onClick={onNextStep}>
+              Next Step
+            </button>
+          </div>
         </div>
       </form>
     </div>

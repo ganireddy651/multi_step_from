@@ -5,6 +5,7 @@
   margin: 30px 0;
 }
 .user-info-container {
+  width: 50%;
 }
 
 .toggle-container {
@@ -14,5 +15,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 3px;
+  border-radius: 5px;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+.go-back-button {
+  background-color: transparent;
+  border: 0;
+  font-size: 16px;
+  color: hsl(231, 11%, 63%);
+  font-weight: 600;
+  cursor: pointer;
+}
+.go-back-button:hover {
+  color: hsl(213, 96%, 18%);
+  transition: 0.5s;
 }

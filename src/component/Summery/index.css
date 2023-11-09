@@ -1,0 +1,9 @@
+.confirm-button {
+  background-color: hsl(243, 100%, 62%);
+  border: 0;
+  color: #ffff;
+  height: 42px;
+  width: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}

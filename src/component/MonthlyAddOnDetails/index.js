@@ -4,18 +4,24 @@ import './index.css'
 
 const MonthlyAddOnDetails = props => {
   const {eachAddon} = props
-  const {id, service, description, price} = eachAddon
+  const {service, description, price} = eachAddon
 
-  const {
-    choosePlan,
-    changeChoosePlan,
-    chooseAddOns,
-    changeChooseAddOns,
-  } = useContext(FormContext)
+  const {chooseAddOns, changeChooseAddOns, addToSummery} = useContext(
+    FormContext,
+  )
+
+  const onAddMonthlyAddon = () => {
+    changeChooseAddOns()
+    addToSummery({service, price})
+  }
+
+  const containerStyles = chooseAddOns
+    ? 'selected-addon-details'
+    : 'addon-details'
 
   return (
-    <div className="addon-details">
-      <input id={service} type="checkbox" />
+    <div className={containerStyles}>
+      <input onClick={onAddMonthlyAddon} id={service} type="checkbox" />
       <label htmlFor={service} className="label-container">
         <div>
           <span style={{display: 'block'}}>{service}</span>
